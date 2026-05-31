@@ -1,24 +1,24 @@
 <?php
-// Database configuration for XAMPP
+$host = "mysql-6ca1d4f-vijayadurgachandana7-1cae.j.aivencloud.com";
+$port = 27447;
+$dbname = "defaultdb";
+$username = "avnadmin";
+$password = "AVNS_1EO2y8s-g1dQKO-HBLE"; // paste from Aiven
 
-$host = "localhost";
-$dbname = "hotel_db";
-$username = "root";
-$password = "Root@123";
-
-// Create connection using PDO
 try {
     $pdo = new PDO(
-        "mysql:host=$host;dbname=$dbname;charset=utf8",
+        "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8",
         $username,
-        $password
+        $password,
+        [
+            PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false
+        ]
     );
 
-    // Set error mode to exception (important for debugging)
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+
 } catch (PDOException $e) {
-    // Stop execution if connection fails
-    die("Database Connection Failed: " . $e->getMessage());
+    die("Connection failed: " . $e->getMessage());
 }
 ?>
